@@ -47,12 +47,12 @@ export const convertPdf = async (req, res) => {
     const QRCodeImagePng = await pdfDoc.embedPng(QRCodeImage)
     const QRCodeImagePngDims = QRCodeImagePng.scale(0.5)
 
-    // Get the first page of the document
+    // Get the each page of the document
     const pages = pdfDoc.getPages()
     for (const page of pages) {
-        // Get the width and height of the first page
+        // Get the width and height of the each page
         const { width, height } = page.getSize()
-        // Draw a string of text diagonally across the first page
+        // Draw a string of text diagonally across the each page
         page.drawText('Dokumen ini telah ditandatangani secara elektronik menggunakan sertifikat elektronik yang diterbitkan oleh Balai Sertifikasi', {
             x: 106,
             y: 72,
