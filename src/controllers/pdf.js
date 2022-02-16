@@ -82,6 +82,8 @@ export const convertPdf = async (req, res) => {
             width: QRCodeImagePngDims.width,
             height: QRCodeImagePngDims.height,
         }) 
+
+        // TODO : Need to be fixed align center
         // page.drawText('AK293KDMD9', {
         //     x: 32,
         //     y: 30,
