@@ -30,12 +30,9 @@ export const convertPdf = async (req, res) => {
         width: 90,
         height: 90,
         logo: './images/specimen-with-bg.png',
-        logoWidth: 30,
-        logoHeight: 30,
-        title: 'YTAWNWYZIU', // content 
-        titleFont: "normal normal bold 14px Arial", // font
-        titleHeight: 30, // height, including subTitle. default is 0
-        titleTop: 25, // draws y coordinates. default is 30
+        logoWidth: 45,
+        logoHeight: 45,
+        correctLevel : QRCode.CorrectLevel.H
     };
 
     // New instance with options
@@ -83,14 +80,13 @@ export const convertPdf = async (req, res) => {
             height: QRCodeImagePngDims.height,
         }) 
 
-        // TODO : Need to be fixed align center
-        // page.drawText('AK293KDMD9', {
-        //     x: 32,
-        //     y: 30,
-        //     size: 8,
-        //     font: arialRegularFont,
-        //     color: rgb(0, 0, 0),
-        // })   
+        page.drawText('AK293KDMD9', {
+            x: 33,
+            y: 30,
+            size: 8,
+            font: arialRegularFont,
+            color: rgb(0, 0, 0),
+        })   
     }
 
     // Serialize the PDFDocument to bytes (a Uint8Array)
