@@ -19,6 +19,7 @@
     "dotenv": "^16.0.0",
     "easyqrcodejs-nodejs": "^4.4.3",
     "express": "^4.17.2",
+    "helmet": "^5.0.2",
     "node-fetch": "^3.2.0",
     "pdf-lib": "^1.17.1"
   },

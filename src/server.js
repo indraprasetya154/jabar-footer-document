@@ -11,6 +11,7 @@ const PORT = process.env.PORT
 const ENV = process.env.APP_ENV
 
 app.use(cors());
+app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/api', routes);
