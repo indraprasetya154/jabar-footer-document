@@ -1,5 +1,5 @@
 # This stage installs our modules
-FROM --platform=linux/amd64 node:17-alpine
+FROM --platform=linux/amd64 geekduck/node-canvas:alpine
 WORKDIR /app
 COPY src/package*.json ./
 
