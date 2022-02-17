@@ -18,8 +18,4 @@
 
 ### Package
 - https://github.com/Hopding/pdf-lib
-- https://github.com/ushelp/EasyQRCodeJS-NodeJS
-- https://github.com/Automattic/node-canvas
-
-#### Current Issue (on my local machine - mac)
-- Cannot run node-canvas with image svg
+- https://github.com/soldair/node-qrcode
