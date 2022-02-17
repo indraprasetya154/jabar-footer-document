@@ -3,7 +3,6 @@ import fontkit from '@pdf-lib/fontkit'
 import fetch from 'node-fetch';
 import fs from 'fs';
 import QRCode from 'qrcode';
-import * as Canvas from 'canvas';
 
 export const addFooterPdf = async (req, res) => {
     // Fetch an existing PDF document
@@ -16,28 +15,16 @@ export const addFooterPdf = async (req, res) => {
     const arialRegularFontBytes = fs.readFileSync('./fonts/Arial.ttf')
     const arialRegularFont = await pdfDoc.embedFont(arialRegularFontBytes)
     // Setup QRCode Options
-    const codeWidth = 90
-    const iconWidth = 36
-    const canvas = Canvas.default.createCanvas(codeWidth, codeWidth)
-    const ctx = canvas.getContext('2d')
-    const QRCodeImage = await QRCode.toCanvas(canvas, req.body.url, {
-            width: codeWidth,
+    const QRCodeImage = await QRCode.toDataURL(req.body.url, {
+            width: 45,
             margin: 0,
             errorCorrectionLevel: 'H',
-        }).then(() => {
-            const loadImage = Canvas.default.loadImage('./images/specimen-with-bg.png').then(image => {
-                const iconPos = (codeWidth - iconWidth) / 2
-                ctx.imageSmoothingEnabled = false;
-                ctx.drawImage(image, iconPos, iconPos, iconWidth, iconWidth)
-                console.log(canvas.toDataURL());    
-                return canvas.toDataURL()
-            })
-
-            return loadImage
+        }).then((url) => {
+            return url
         });  
         
     const QRCodeImagePng = await pdfDoc.embedPng(QRCodeImage)
-    const QRCodeImagePngDims = QRCodeImagePng.scale(0.5)
+    const QRCodeImageLogo = await pdfDoc.embedPng(fs.readFileSync('./images/specimen-with-bg.png'))
     // Get the each page of the document
     const pages = pdfDoc.getPages()
 
@@ -72,17 +59,23 @@ export const addFooterPdf = async (req, res) => {
                     font: arialRegularFont,
                     color: rgb(0, 0, 0),
                 })
-        
-                // Draw the PNG image near the lower right corner of the JPG image
+                // Draw the QRCode
                 page.drawImage(QRCodeImagePng, {
                     x: 35,
                     y: 40,
-                    width: QRCodeImagePngDims.width,
-                    height: QRCodeImagePngDims.height,
+                    width: 45,
+                    height: 45,
                 }) 
-        
+                // Draw the Logo QRCode Manually
+                page.drawImage(QRCodeImageLogo, {
+                    x: 48,
+                    y: 53,
+                    width: 20,
+                    height: 20,
+                }) 
+                // Add title on bottom QRCode
                 page.drawText(req.body.code, {
-                    x: 33,
+                    x: 32,
                     y: 30,
                     size: 8,
                     font: arialRegularFont,
