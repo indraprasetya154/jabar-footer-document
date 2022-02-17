@@ -1,8 +1,9 @@
-import { degrees, PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+import { PDFDocument, rgb } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit'
-import QRCode from 'easyqrcodejs-nodejs';
 import fetch from 'node-fetch';
 import fs from 'fs';
+import QRCode from 'qrcode';
+import * as Canvas from 'canvas';
 
 export const addFooterPdf = async (req, res) => {
     // Fetch an existing PDF document
@@ -15,20 +16,26 @@ export const addFooterPdf = async (req, res) => {
     const arialRegularFontBytes = fs.readFileSync('./fonts/Arial.ttf')
     const arialRegularFont = await pdfDoc.embedFont(arialRegularFontBytes)
     // Setup QRCode Options
-    let options = {
-        text: req.body.url,
-        width: 90,
-        height: 90,
-        logo: './images/specimen-with-bg.png',
-        logoWidth: 45,
-        logoHeight: 45,
-        correctLevel : QRCode.CorrectLevel.H
-    };
-    // New instance with options
-    let createQRCode = new QRCode(options);
-    const QRCodeImage = await createQRCode.toDataURL().then((data) => {
-        return data;
-    });
+    const codeWidth = 90
+    const iconWidth = 36
+    const canvas = Canvas.default.createCanvas(codeWidth, codeWidth)
+    const ctx = canvas.getContext('2d')
+    const QRCodeImage = await QRCode.toCanvas(canvas, req.body.url, {
+            width: codeWidth,
+            margin: 0,
+            errorCorrectionLevel: 'H',
+        }).then(() => {
+            const loadImage = Canvas.default.loadImage('./images/specimen-with-bg.png').then(image => {
+                const iconPos = (codeWidth - iconWidth) / 2
+                ctx.imageSmoothingEnabled = false;
+                ctx.drawImage(image, iconPos, iconPos, iconWidth, iconWidth)
+                console.log(canvas.toDataURL());    
+                return canvas.toDataURL()
+            })
+
+            return loadImage
+        });  
+        
     const QRCodeImagePng = await pdfDoc.embedPng(QRCodeImage)
     const QRCodeImagePngDims = QRCodeImagePng.scale(0.5)
     // Get the each page of the document

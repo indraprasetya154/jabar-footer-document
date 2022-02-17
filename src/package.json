@@ -1,13 +1,12 @@
 {
   "name": "research-modify-pdf",
   "version": "1.0.0",
-  "description": "",
+  "description": "Add footer on PDF with text and qrcode",
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -18,11 +17,11 @@
     "canvas": "^2.9.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
-    "easyqrcodejs-nodejs": "^4.4.3",
     "express": "^4.17.2",
     "helmet": "^5.0.2",
     "node-fetch": "^3.2.0",
-    "pdf-lib": "^1.17.1"
+    "pdf-lib": "^1.17.1",
+    "qrcode": "^1.5.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
