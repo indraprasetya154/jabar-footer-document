@@ -6,7 +6,7 @@ import QRCode from 'qrcode';
 
 export const addFooterPdf = async (req, res) => {
     // Fetch an existing PDF document
-    const existingPdfBytes = await fetch(req.body.url).then(res => res.arrayBuffer())
+    const existingPdfBytes = await fetch(req.body.pdf).then(res => res.arrayBuffer())
     // Load a PDFDocument from the existing PDF bytes
     const pdfDoc = await PDFDocument.load(existingPdfBytes)
     // Register the `fontkit` instance
@@ -15,7 +15,7 @@ export const addFooterPdf = async (req, res) => {
     const arialRegularFontBytes = fs.readFileSync('./fonts/Arial.ttf')
     const arialRegularFont = await pdfDoc.embedFont(arialRegularFontBytes)
     // Setup QRCode Options
-    const QRCodeImage = await QRCode.toDataURL(req.body.url, {
+    const QRCodeImage = await QRCode.toDataURL(req.body.qrcode, {
             width: 45,
             margin: 0,
             errorCorrectionLevel: 'H',
@@ -34,8 +34,8 @@ export const addFooterPdf = async (req, res) => {
         });
     }
 
-    switch (req.body.template) {
-        case 'potrait':
+    switch (req.body.category) {
+        case 1:
             for (const page of pages) {
                 // Draw a string of text diagonally across the each page
                 page.drawText('Dokumen ini telah ditandatangani secara elektronik menggunakan sertifikat elektronik yang diterbitkan oleh Balai Sertifikasi', {
