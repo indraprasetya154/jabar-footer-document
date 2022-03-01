@@ -3,12 +3,16 @@
 - Add text on footer pdf page
 - Add QR Code on footer pdf page
 
+#### Category Support (WIP 1-4)
+- 1
+
 ### Endpoints
 - `POST` APP_URL/api/add-footer-pdf
 ````
 {
-    "url": "https://your-url-pdf",
-    "template": "potrait", // now only support this template
+    "pdf": "https://your-url-pdf",
+    "qrcode": "YOUR QRCODE VALUE",
+    "category": 1,
     "code": "YOUR RANDOM CODE"
 }
 ````
