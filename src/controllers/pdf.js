@@ -82,15 +82,49 @@ export const addFooterPdf = async (req, res) => {
                     color: rgb(0, 0, 0),
                 })   
             }
-        
-            // Serialize the PDFDocument to bytes (a Uint8Array)
-            const pdfBytes = await pdfDoc.save()
-            let pdfBuffer = Buffer.from(pdfBytes.buffer, 'binary');
 
-            res.status(200);
-            res.type('pdf');
-            res.setHeader('Content-Type', 'application/pdf');
-            res.send(pdfBuffer);
+            break;
+
+        case 3:
+            for (const page of pages) {
+                // Draw a string of text diagonally across the each page
+                page.drawText('Dokumen ini telah ditandatangani secara elektronik menggunakan sertifikat elektronik yang diterbitkan oleh Balai Sertifikasi Elektronik (BSrE) Badan Siber dan Sandi Negara. Dokumen digital', {
+                    x: 180,
+                    y: 40,
+                    size: 8,
+                    font: arialRegularFont,
+                    color: rgb(0, 0, 0),
+                })
+                page.drawText('yang asli dapat diperoleh dengan memindai QR Code atau memasukkan kode pada Aplikasi TNDE Pemerintah Daerah Provinsi Jawa Barat.', {
+                    x: 265,
+                    y: 30,
+                    size: 8,
+                    font: arialRegularFont,
+                    color: rgb(0, 0, 0),
+                })
+                // Draw the QRCode
+                page.drawImage(QRCodeImagePng, {
+                    x: 50,
+                    y: 17,
+                    width: 40,
+                    height: 40,
+                }) 
+                // Draw the Logo QRCode Manually
+                page.drawImage(QRCodeImageLogo, {
+                    x: 63,
+                    y: 30,
+                    width: 15,
+                    height: 15,
+                }) 
+                // Add title on bottom QRCode
+                page.drawText(req.body.code, {
+                    x: 47,
+                    y: 7,
+                    size: 7,
+                    font: arialRegularFont,
+                    color: rgb(0, 0, 0),
+                })   
+            }
 
             break;
     
@@ -100,4 +134,13 @@ export const addFooterPdf = async (req, res) => {
             });
             break;
     }
+        
+    // Serialize the PDFDocument to bytes (a Uint8Array)
+    const pdfBytes = await pdfDoc.save()
+    let pdfBuffer = Buffer.from(pdfBytes.buffer, 'binary');
+
+    res.status(200);
+    res.type('pdf');
+    res.setHeader('Content-Type', 'application/pdf');
+    res.send(pdfBuffer);
 }
