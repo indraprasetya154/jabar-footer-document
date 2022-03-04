@@ -127,6 +127,56 @@ export const addFooterPdf = async (req, res) => {
             }
 
             break;
+
+        case 4:
+            for (const page of pages) {
+                // Draw a string of text diagonally across the each page
+                page.drawText('Dokumen ini telah ditandatangani secara elektronik menggunakan sertifikat elektronik yang diterbitkan oleh Balai Sertifikasi Elektronik (BSrE) Badan', {
+                    x: 90,
+                    y: 34,
+                    size: 7,
+                    font: arialRegularFont,
+                    color: rgb(0, 0, 0),
+                })
+                page.drawText('Siber dan Sandi Negara. Dokumen digital yang asli dapat diperoleh dengan memindai QR Code atau memasukkan kode pada Aplikasi TNDE', {
+                    x: 100,
+                    y: 24,
+                    size: 7,
+                    font: arialRegularFont,
+                    color: rgb(0, 0, 0),
+                })
+                page.drawText('Pemerintah Daerah Provinsi Jawa Barat.', {
+                    x: 255,
+                    y: 14,
+                    size: 7,
+                    font: arialRegularFont,
+                    color: rgb(0, 0, 0),
+                })
+                // Draw the QRCode
+                page.drawImage(QRCodeImagePng, {
+                    x: 35,
+                    y: 15,
+                    width: 30,
+                    height: 30,
+                }) 
+                // Draw the Logo QRCode Manually
+                page.drawImage(QRCodeImageLogo, {
+                    x: 44,
+                    y: 24,
+                    width: 12,
+                    height: 12,
+                }) 
+                // Add title on bottom QRCode
+                page.drawText(req.body.code, {
+                    x: 31,
+                    y: 8,
+                    size: 6,
+                    font: arialRegularFont,
+                    color: rgb(0, 0, 0),
+                })   
+            }
+
+            break;
     
         default:
             res.status(400).json({
