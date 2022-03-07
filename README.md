@@ -3,8 +3,8 @@
 - Add text on footer pdf page
 - Add QR Code on footer pdf page
 
-#### Category Support (WIP 1-4)
-- 1
+#### Category Support
+- 1. 2, 3, 4
 
 ### Endpoints
 - `POST` APP_URL/api/add-footer-pdf
