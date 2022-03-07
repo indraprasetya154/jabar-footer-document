@@ -40,7 +40,7 @@ export const addFooterPdf = async (req, res) => {
                 // Draw a string of text diagonally across the each page
                 page.drawText('Dokumen ini telah ditandatangani secara elektronik menggunakan sertifikat elektronik yang diterbitkan oleh Balai Sertifikasi', {
                     x: 106,
-                    y: 72,
+                    y: 70,
                     size: 8,
                     font: arialRegularFont,
                     color: rgb(0, 0, 0),
@@ -54,7 +54,7 @@ export const addFooterPdf = async (req, res) => {
                 })
                 page.drawText('memasukkan kode pada Aplikasi TNDE Pemerintah Daerah Provinsi Jawa Barat.', {
                     x: 180,
-                    y: 48,
+                    y: 50,
                     size: 8,
                     font: arialRegularFont,
                     color: rgb(0, 0, 0),
@@ -78,6 +78,49 @@ export const addFooterPdf = async (req, res) => {
                     x: 32,
                     y: 30,
                     size: 8,
+                    font: arialRegularFont,
+                    color: rgb(0, 0, 0),
+                })   
+            }
+
+            break;
+
+        case 2:
+            for (const page of pages) {
+                // Draw a string of text diagonally across the each page
+                page.drawText('Dokumen ini telah ditandatangani secara elektronik menggunakan sertifikat elektronik yang diterbitkan oleh Balai Sertifikasi Elektronik (BSrE) Badan Siber dan Sandi Negara.', {
+                    x: 115,
+                    y: 25,
+                    size: 8,
+                    font: arialRegularFont,
+                    color: rgb(0, 0, 0),
+                })
+                page.drawText('Dokumen digital yang asli dapat diperoleh dengan memindai QR Code atau memasukkan kode pada Aplikasi TNDE Pemerintah Daerah Provinsi Jawa Barat.', {
+                    x: 135,
+                    y: 15,
+                    size: 8,
+                    font: arialRegularFont,
+                    color: rgb(0, 0, 0),
+                })
+                // Draw the QRCode
+                page.drawImage(QRCodeImagePng, {
+                    x: 117,
+                    y: 57,
+                    width: 40,
+                    height: 40,
+                }) 
+                // Draw the Logo QRCode Manually
+                page.drawImage(QRCodeImageLogo, {
+                    x: 130,
+                    y: 70,
+                    width: 15,
+                    height: 15,
+                }) 
+                // Add title on bottom QRCode
+                page.drawText(req.body.code, {
+                    x: 114,
+                    y: 47,
+                    size: 7,
                     font: arialRegularFont,
                     color: rgb(0, 0, 0),
                 })   
