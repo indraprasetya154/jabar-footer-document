@@ -4,7 +4,7 @@
 - Add QR Code on footer pdf page
 
 #### Category Support
-- 1, 2, 3, 4
+- 1, 2, 3, 4, 5
 
 ### Endpoints
 - `POST` APP_URL/api/add-footer-pdf
