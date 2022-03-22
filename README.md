@@ -7,7 +7,7 @@
 - 1, 2, 3, 4, 5
 
 ### Endpoints
-- `POST` APP_URL/api/add-footer-pdf
+- `POST` https://research-modify-pdf.rover.digitalservice.id/api/add-footer-pdf
 ````
 {
     "pdf": "https://your-url-pdf",
