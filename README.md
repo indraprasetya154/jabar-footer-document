@@ -1,4 +1,4 @@
-## Research Modify PDF File
+## Jabar Footer Document
 
 - Add text on footer pdf page
 - Add QR Code on footer pdf page
@@ -7,10 +7,14 @@
 - 1, 2, 3, 4, 5
 
 ### Endpoints
+### Stable
+- `POST` https://jabar-footer-document.rover.digitalservice.id/api/add-footer-pdf
+
+### Playground
 - `POST` https://research-modify-pdf.rover.digitalservice.id/api/add-footer-pdf
 ````
 {
-    "pdf": "https://your-url-pdf",
+    "pdf": "https://your-url/file.pdf",
     "qrcode": "YOUR QRCODE VALUE",
     "category": 1,
     "code": "YOUR RANDOM CODE"
