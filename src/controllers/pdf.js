@@ -3,6 +3,11 @@ import fontkit from '@pdf-lib/fontkit'
 import fetch from 'node-fetch';
 import fs from 'fs';
 import QRCode from 'qrcode';
+import { drawTemplate1 } from './category/1.js';
+import { drawTemplate2 } from './category/2.js';
+import { drawTemplate3 } from './category/3.js';
+import { drawTemplate4 } from './category/4.js';
+import { drawTemplate5 } from './category/5.js';
 
 export const addFooterPdf = async (req, res) => {
     try {
@@ -37,312 +42,28 @@ export const addFooterPdf = async (req, res) => {
 
         switch (req.body.category) {
             case 1:
-                for (const page of pages) {
-                    // Draw a string of text diagonally across the each page
-                    page.drawText('Dokumen ini telah ditandatangani secara elektronik menggunakan sertifikat elektronik yang diterbitkan oleh Balai Sertifikasi', {
-                        x: 111,
-                        y: 53,
-                        size: 8,
-                        font: arialRegularFont,
-                        color: rgb(0, 0, 0),
-                    })
-                    page.drawText('Elektronik (BSrE) Badan Siber dan Sandi Negara. Dokumen digital yang asli dapat diperoleh dengan memindai QR Code atau', {
-                        x: 105,
-                        y: 43,
-                        size: 8,
-                        font: arialRegularFont,
-                        color: rgb(0, 0, 0),
-                    })
-                    page.drawText('memasukkan kode pada Aplikasi TNDE Pemerintah Daerah Provinsi Jawa Barat.', {
-                        x: 185,
-                        y: 33,
-                        size: 8,
-                        font: arialRegularFont,
-                        color: rgb(0, 0, 0),
-                    })
-                    // Draw text link footer
-                    page.drawText('Untuk mengecek keaslian surat silahkan klik link ', {
-                        x: 157,
-                        y: 23,
-                        size: 8,
-                        font: arialRegularFont,
-                        color: rgb(0, 0, 0),
-                    })
-                    page.drawText(req.body.qrcode, {
-                        x: 330,
-                        y: 23,
-                        size: 8,
-                        font: arialRegularFont,
-                        color: rgb(30/255, 136/255, 229/255),
-                    })
-                    // Draw the QRCode
-                    page.drawImage(QRCodeImagePng, {
-                        x: 40,
-                        y: 20,
-                        width: 45,
-                        height: 45,
-                    })
-                    // Draw the Logo QRCode Manually
-                    page.drawImage(QRCodeImageLogo, {
-                        x: 53,
-                        y: 33,
-                        width: 20,
-                        height: 20,
-                    })
-                    // Add title on bottom QRCode
-                    page.drawText(req.body.code, {
-                        x: 37,
-                        y: 10,
-                        size: 8,
-                        font: arialRegularFont,
-                        color: rgb(0, 0, 0),
-                    })
-                }
-
+                drawTemplate1(req, pages, arialRegularFont, QRCodeImagePng, QRCodeImageLogo)
                 break;
 
             case 2:
-                for (const page of pages) {
-                    // Draw a string of text diagonally across the each page
-                    page.drawText('Dokumen ini telah ditandatangani secara elektronik menggunakan sertifikat elektronik yang diterbitkan oleh Balai Sertifikasi Elektronik (BSrE) Badan Siber dan Sandi Negara.', {
-                        x: 115,
-                        y: 28,
-                        size: 8,
-                        font: arialRegularFont,
-                        color: rgb(0, 0, 0),
-                    })
-                    page.drawText('Dokumen digital yang asli dapat diperoleh dengan memindai QR Code atau memasukkan kode pada Aplikasi TNDE Pemerintah Daerah Provinsi Jawa Barat.', {
-                        x: 135,
-                        y: 18,
-                        size: 8,
-                        font: arialRegularFont,
-                        color: rgb(0, 0, 0),
-                    })
-                    // Draw text link footer
-                    page.drawText('Untuk mengecek keaslian surat silahkan klik link ', {
-                        x: 228,
-                        y: 8,
-                        size: 8,
-                        font: arialRegularFont,
-                        color: rgb(0, 0, 0),
-                    })
-                    page.drawText(req.body.qrcode, {
-                        x: 402,
-                        y: 8,
-                        size: 8,
-                        font: arialRegularFont,
-                        color: rgb(30/255, 136/255, 229/255),
-                    })
-                    // Draw the QRCode
-                    page.drawImage(QRCodeImagePng, {
-                        x: 117,
-                        y: 52,
-                        width: 40,
-                        height: 40,
-                    })
-                    // Draw the Logo QRCode Manually
-                    page.drawImage(QRCodeImageLogo, {
-                        x: 130,
-                        y: 65,
-                        width: 15,
-                        height: 15,
-                    })
-                    // Add title on bottom QRCode
-                    page.drawText(req.body.code, {
-                        x: 115,
-                        y: 42,
-                        size: 7,
-                        font: arialRegularFont,
-                        color: rgb(0, 0, 0),
-                    })
-                }
-
+                drawTemplate2(req, pages, arialRegularFont, QRCodeImagePng, QRCodeImageLogo)
                 break;
 
             case 3:
-                for (const page of pages) {
-                    // Draw a string of text diagonally across the each page
-                    page.drawText('Dokumen ini telah ditandatangani secara elektronik menggunakan sertifikat elektronik yang diterbitkan oleh Balai Sertifikasi Elektronik (BSrE) Badan Siber dan Sandi Negara. Dokumen digital', {
-                        x: 180,
-                        y: 40,
-                        size: 8,
-                        font: arialRegularFont,
-                        color: rgb(0, 0, 0),
-                    })
-                    page.drawText('yang asli dapat diperoleh dengan memindai QR Code atau memasukkan kode pada Aplikasi TNDE Pemerintah Daerah Provinsi Jawa Barat.', {
-                        x: 265,
-                        y: 30,
-                        size: 8,
-                        font: arialRegularFont,
-                        color: rgb(0, 0, 0),
-                    })
-                    // Draw text link footer
-                    page.drawText('Untuk mengecek keaslian surat silahkan klik link ', {
-                        x: 328,
-                        y: 20,
-                        size: 8,
-                        font: arialRegularFont,
-                        color: rgb(0, 0, 0),
-                    })
-                    page.drawText(req.body.qrcode, {
-                        x: 502,
-                        y: 20,
-                        size: 8,
-                        font: arialRegularFont,
-                        color: rgb(30/255, 136/255, 229/255),
-                    })
-                    // Draw the QRCode
-                    page.drawImage(QRCodeImagePng, {
-                        x: 50,
-                        y: 17,
-                        width: 40,
-                        height: 40,
-                    })
-                    // Draw the Logo QRCode Manually
-                    page.drawImage(QRCodeImageLogo, {
-                        x: 63,
-                        y: 30,
-                        width: 15,
-                        height: 15,
-                    })
-                    // Add title on bottom QRCode
-                    page.drawText(req.body.code, {
-                        x: 47,
-                        y: 7,
-                        size: 7,
-                        font: arialRegularFont,
-                        color: rgb(0, 0, 0),
-                    })
-                }
-
+                drawTemplate3(req, pages, arialRegularFont, QRCodeImagePng, QRCodeImageLogo)
                 break;
 
             case 4:
-                for (const page of pages) {
-                    // Draw a string of text diagonally across the each page
-                    page.drawText('Dokumen ini telah ditandatangani secara elektronik menggunakan sertifikat elektronik yang diterbitkan oleh Balai Sertifikasi Elektronik (BSrE) Badan', {
-                        x: 90,
-                        y: 50,
-                        size: 7,
-                        font: arialRegularFont,
-                        color: rgb(0, 0, 0),
-                    })
-                    page.drawText('Siber dan Sandi Negara. Dokumen digital yang asli dapat diperoleh dengan memindai QR Code atau memasukkan kode pada Aplikasi TNDE', {
-                        x: 100,
-                        y: 40,
-                        size: 7,
-                        font: arialRegularFont,
-                        color: rgb(0, 0, 0),
-                    })
-                    page.drawText('Pemerintah Daerah Provinsi Jawa Barat.', {
-                        x: 255,
-                        y: 30,
-                        size: 7,
-                        font: arialRegularFont,
-                        color: rgb(0, 0, 0),
-                    })
-                    // Draw text link footer
-                    page.drawText('Untuk mengecek keaslian surat silahkan klik link ', {
-                        x: 178,
-                        y: 20,
-                        size: 7,
-                        font: arialRegularFont,
-                        color: rgb(0, 0, 0),
-                    })
-                    page.drawText(req.body.qrcode, {
-                        x: 330,
-                        y: 20,
-                        size: 7,
-                        font: arialRegularFont,
-                        color: rgb(30/255, 136/255, 229/255),
-                    })
-                    // Draw the QRCode
-                    page.drawImage(QRCodeImagePng, {
-                        x: 35,
-                        y: 20,
-                        width: 40,
-                        height: 40,
-                    })
-                    // Draw the Logo QRCode Manually
-                    page.drawImage(QRCodeImageLogo, {
-                        x: 50,
-                        y: 35,
-                        width: 12,
-                        height: 12,
-                    })
-                    // Add title on bottom QRCode
-                    page.drawText(req.body.code, {
-                        x: 33,
-                        y: 13,
-                        size: 7,
-                        font: arialRegularFont,
-                        color: rgb(0, 0, 0),
-                    })
-                }
-
+                drawTemplate4(req, pages, arialRegularFont, QRCodeImagePng, QRCodeImageLogo)
                 break;
 
-                case 5:
-                    for (const page of pages) {
-                        // Draw a string of text diagonally across the each page
-                        page.drawText('Dokumen ini telah ditandatangani secara elektronik menggunakan sertifikat elektronik yang diterbitkan oleh Balai Sertifikasi Elektronik (BSrE) Badan Siber dan Sandi Negara.', {
-                            x: 150,
-                            y: 40,
-                            size: 8,
-                            font: arialRegularFont,
-                            color: rgb(0, 0, 0),
-                        })
-                        page.drawText('Dokumen digital yang asli dapat diperoleh dengan memindai QR Code atau memasukkan kode pada Aplikasi TNDE Pemerintah Daerah Provinsi Jawa Barat.', {
-                            x: 175,
-                            y: 30,
-                            size: 8,
-                            font: arialRegularFont,
-                            color: rgb(0, 0, 0),
-                        })
-                        // Draw text link footer
-                        page.drawText('Untuk mengecek keaslian surat silahkan klik link ', {
-                            x: 288,
-                            y: 20,
-                            size: 8,
-                            font: arialRegularFont,
-                            color: rgb(0, 0, 0),
-                        })
-                        page.drawText(req.body.qrcode, {
-                            x: 462,
-                            y: 20,
-                            size: 8,
-                            font: arialRegularFont,
-                            color: rgb(30/255, 136/255, 229/255),
-                        })
-                        // Draw the QRCode
-                        page.drawImage(QRCodeImagePng, {
-                            x: 70,
-                            y: 17,
-                            width: 40,
-                            height: 40,
-                        })
-                        // Draw the Logo QRCode Manually
-                        page.drawImage(QRCodeImageLogo, {
-                            x: 83,
-                            y: 30,
-                            width: 15,
-                            height: 15,
-                        })
-                        // Add title on bottom QRCode
-                        page.drawText(req.body.code, {
-                            x: 67,
-                            y: 7,
-                            size: 7,
-                            font: arialRegularFont,
-                            color: rgb(0, 0, 0),
-                        })
-                    }
-
-                    break;
+            case 5:
+                drawTemplate5(req, pages, arialRegularFont, QRCodeImagePng, QRCodeImageLogo)
+                break;
 
             default:
                 res.status(400).json({
-                    message: 'Template type not yet supported'
+                    message: 'Category not yet available'
                 });
                 break;
         }
