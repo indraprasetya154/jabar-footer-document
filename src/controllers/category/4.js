@@ -48,8 +48,8 @@ export function drawTemplate4(req, pages, arialRegularFont, QRCodeImagePng, QRCo
         })
         // Draw the Logo QRCode Manually
         page.drawImage(QRCodeImageLogo, {
-            x: 50,
-            y: 35,
+            x: 49,
+            y: 34,
             width: 12,
             height: 12,
         })
