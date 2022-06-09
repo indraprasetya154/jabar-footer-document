@@ -1,6 +1,6 @@
 import { rgb } from 'pdf-lib';
 
-export function drawTemplate2(req, pages, arialRegularFont, QRCodeImagePng, QRCodeImageLogo) {
+export function drawTemplate2(req, pages, arialRegularFont, QRCodeImagePng, QRCodeImageLogo, footerUrl) {
     for (const page of pages) {
         // Draw a string of text diagonally across the each page
         page.drawText('Dokumen ini telah ditandatangani secara elektronik menggunakan sertifikat elektronik yang diterbitkan oleh Balai Sertifikasi Elektronik (BSrE) Badan Siber dan Sandi Negara.', {
@@ -25,7 +25,7 @@ export function drawTemplate2(req, pages, arialRegularFont, QRCodeImagePng, QRCo
             font: arialRegularFont,
             color: rgb(0, 0, 0),
         })
-        page.drawText(req.body.qrcode, {
+        page.drawText(footerUrl, {
             x: 402,
             y: 8,
             size: 8,

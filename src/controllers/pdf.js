@@ -31,6 +31,10 @@ export const addFooterPdf = async (req, res) => {
 
         const QRCodeImagePng = await pdfDoc.embedPng(QRCodeImage)
         const QRCodeImageLogo = await pdfDoc.embedPng(fs.readFileSync('./images/specimen-with-bg.png'))
+
+        let baseUrlReq = new URL(req.body.pdf)
+        const footerUrl =  baseUrlReq.origin + '/v/' + req.body.code
+
         // Get the each page of the document
         const pages = pdfDoc.getPages()
 
@@ -42,23 +46,23 @@ export const addFooterPdf = async (req, res) => {
 
         switch (req.body.category) {
             case 1:
-                drawTemplate1(req, pages, arialRegularFont, QRCodeImagePng, QRCodeImageLogo)
+                drawTemplate1(req, pages, arialRegularFont, QRCodeImagePng, QRCodeImageLogo, footerUrl)
                 break;
 
             case 2:
-                drawTemplate2(req, pages, arialRegularFont, QRCodeImagePng, QRCodeImageLogo)
+                drawTemplate2(req, pages, arialRegularFont, QRCodeImagePng, QRCodeImageLogo, footerUrl)
                 break;
 
             case 3:
-                drawTemplate3(req, pages, arialRegularFont, QRCodeImagePng, QRCodeImageLogo)
+                drawTemplate3(req, pages, arialRegularFont, QRCodeImagePng, QRCodeImageLogo, footerUrl)
                 break;
 
             case 4:
-                drawTemplate4(req, pages, arialRegularFont, QRCodeImagePng, QRCodeImageLogo)
+                drawTemplate4(req, pages, arialRegularFont, QRCodeImagePng, QRCodeImageLogo, footerUrl)
                 break;
 
             case 5:
-                drawTemplate5(req, pages, arialRegularFont, QRCodeImagePng, QRCodeImageLogo)
+                drawTemplate5(req, pages, arialRegularFont, QRCodeImagePng, QRCodeImageLogo, footerUrl)
                 break;
 
             default:
