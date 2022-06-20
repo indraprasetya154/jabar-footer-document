@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { addFooterPdf } from '../controllers/pdf.js';
+import { addDraftPdf } from '../controllers/draft.js'
 
 const routes = new Router();
 
@@ -10,5 +11,6 @@ routes.get('/', (req, res) => {
     });
 })
 routes.post('/api/add-footer-pdf', addFooterPdf);
+routes.post('/api/add-draft-pdf', addDraftPdf);
 
 export default routes;
