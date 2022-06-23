@@ -12,8 +12,8 @@ export const addDraftPdf = async (req, res) => {
         // Register the `fontkit` instance
         pdfDoc.registerFontkit(fontkit)
         // Set Font
-        const arialRegularFontBytes = fs.readFileSync('./fonts/Arial.ttf')
-        const arialRegularFont = await pdfDoc.embedFont(arialRegularFontBytes)
+        const arialRegularBoldFontBytes = fs.readFileSync('./fonts/Arial-Bold.ttf')
+        const arialRegularBoldFont = await pdfDoc.embedFont(arialRegularBoldFontBytes)
 
         // Get the each page of the document
         const pages = pdfDoc.getPages()
@@ -30,50 +30,61 @@ export const addDraftPdf = async (req, res) => {
             switch (req.body.category) {
                 case 1:
                     page.drawText(text, {
-                        x: 100,
-                        y: 250,
-                        size: 90,
-                        font: arialRegularFont,
+                        x: 150,
+                        y: 150,
+                        size: 100,
+                        font: arialRegularBoldFont,
                         color: rgb(0, 0, 0),
                         opacity: 0.10,
-                        rotate: degrees(45)
+                        rotate: degrees(60)
                     });
                 break;
 
                 case 2:
                     page.drawText(text, {
-                        x: 200,
-                        y: 150,
-                        size: 90,
-                        font: arialRegularFont,
+                        x: 150,
+                        y: 60,
+                        size: 110,
+                        font: arialRegularBoldFont,
                         color: rgb(0, 0, 0),
                         opacity: 0.10,
-                        rotate: degrees(20)
+                        rotate: degrees(30)
                     });
                 break;
 
                 case 3:
-                case 5:
                     page.drawText(text, {
                         x: 100,
-                        y: 150,
-                        size: 90,
-                        font: arialRegularFont,
+                        y: 100,
+                        size: 100,
+                        font: arialRegularBoldFont,
                         color: rgb(0, 0, 0),
                         opacity: 0.10,
-                        rotate: degrees(20)
+                        rotate: degrees(30)
                     });
                 break;
 
                 case 4:
                     page.drawText(text, {
-                        x: 90,
-                        y: 230,
-                        size: 90,
-                        font: arialRegularFont,
+                        x: 140,
+                        y: 140,
+                        size: 100,
+                        font: arialRegularBoldFont,
                         color: rgb(0, 0, 0),
                         opacity: 0.10,
-                        rotate: degrees(45)
+                        rotate: degrees(60)
+                    });
+                break;
+
+                case 5:
+                    page.drawText(text, {
+                        x: 100,
+                        y: 80,
+                        size: 100,
+                        font: arialRegularBoldFont,
+                        color: rgb(0, 0, 0),
+                        opacity: 0.10,
+                        rotate: degrees(30)
                     });
                 break;
             }
