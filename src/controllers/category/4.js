@@ -5,40 +5,40 @@ export function drawTemplate4(req, pages, arialRegularFont, QRCodeImagePng, QRCo
         // Draw a string of text diagonally across the each page
         page.drawText('Dokumen ini telah ditandatangani secara elektronik menggunakan sertifikat elektronik yang diterbitkan oleh Balai Sertifikasi Elektronik (BSrE) Badan', {
             x: 90,
-            y: 50,
+            y: 50-10,
             size: 7,
             font: arialRegularFont,
             color: rgb(0, 0, 0),
         })
         page.drawText('Siber dan Sandi Negara. Dokumen digital yang asli dapat diperoleh dengan memindai QR Code atau memasukkan kode pada Aplikasi TNDE', {
             x: 100,
-            y: 40,
+            y: 40-10,
             size: 7,
             font: arialRegularFont,
             color: rgb(0, 0, 0),
         })
         page.drawText('Pemerintah Daerah Provinsi Jawa Barat.', {
             x: 255,
-            y: 30,
+            y: 30-10,
             size: 7,
             font: arialRegularFont,
             color: rgb(0, 0, 0),
         })
         // Draw text link footer
-        page.drawText('Untuk mengecek keaslian surat silahkan klik link ', {
-            x: 178,
-            y: 20,
-            size: 7,
-            font: arialRegularFont,
-            color: rgb(0, 0, 0),
-        })
-        page.drawText(footerUrl, {
-            x: 330,
-            y: 20,
-            size: 7,
-            font: arialRegularFont,
-            color: rgb(30/255, 136/255, 229/255),
-        })
+        // page.drawText('Untuk mengecek keaslian surat silahkan klik link ', {
+        //     x: 178,
+        //     y: 20,
+        //     size: 7,
+        //     font: arialRegularFont,
+        //     color: rgb(0, 0, 0),
+        // })
+        // page.drawText(footerUrl, {
+        //     x: 330,
+        //     y: 20,
+        //     size: 7,
+        //     font: arialRegularFont,
+        //     color: rgb(30/255, 136/255, 229/255),
+        // })
         // Draw the QRCode
         page.drawImage(QRCodeImagePng, {
             x: 35,
