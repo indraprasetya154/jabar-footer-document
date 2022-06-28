@@ -1,12 +1,10 @@
 import { PDFDocument, rgb, degrees } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit'
-import fetch from 'node-fetch';
 import fs from 'fs';
 
 export const addDraftPdf = async (req, res) => {
     try {
-        // Fetch an existing PDF document
-        const existingPdfBytes = await fetch(req.body.pdf).then(res => res.arrayBuffer())
+        const existingPdfBytes = fs.readFileSync('./' + req.file.path);
         // Load a PDFDocument from the existing PDF bytes
         const pdfDoc = await PDFDocument.load(existingPdfBytes)
         // Register the `fontkit` instance
@@ -19,15 +17,14 @@ export const addDraftPdf = async (req, res) => {
         const pages = pdfDoc.getPages()
 
         if (pages === 0) {
-            res.status(400).json({
-                message: 'No pages found in url pdf'
-            });
+            throw new Error('No pages found in url pdf');
         }
 
         const text = 'NASKAH DRAFT';
+        const category = parseInt(req.body.category)
         for (const page of pages) {
             // Draw a string of text diagonally across the each page
-            switch (req.body.category) {
+            switch (category) {
                 case 1:
                     page.drawText(text, {
                         x: 150,
@@ -87,18 +84,33 @@ export const addDraftPdf = async (req, res) => {
                         rotate: degrees(30)
                     });
                 break;
+
+                default:
+                    throw new Error('Category not yet available');
+                    break;
             }
         }
 
         // Serialize the PDFDocument to bytes (a Uint8Array)
         const pdfBytes = await pdfDoc.save()
         let pdfBuffer = Buffer.from(pdfBytes.buffer, 'binary');
-
+        // remove file upload
+        if (fs.existsSync(req.file.path)) {
+            fs.unlinkSync(req.file.path)
+            console.log('File Deleted!')
+        }
+        // send response
         res.status(200);
         res.type('pdf');
         res.setHeader('Content-Type', 'application/pdf');
         res.send(pdfBuffer);
     } catch (error) {
+        // remove file upload
+        if (fs.existsSync(req.file.path)) {
+            fs.unlinkSync(req.file.path)
+            console.log('File Deleted!')
+        }
+        // send response
         res.status(400).json({
             message: 'Error while generating PDF. Message: ' + error.message + '. Detail: ' + error.stack,
         });
