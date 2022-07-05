@@ -133,7 +133,7 @@ export const addDraftPdf = async (req, res) => {
         }
         // send response
         res.status(400).json({
-            message: 'Error while generating PDF. Message: ' + error.message + '. Detail: ' + error.stack,
+            message: 'Error while generating PDF. Message: ' + error.message,
         });
     }
 }
