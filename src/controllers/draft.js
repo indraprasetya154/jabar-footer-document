@@ -24,11 +24,22 @@ export const addDraftPdf = async (req, res) => {
         const category = parseInt(req.body.category)
         for (const page of pages) {
             // Draw a string of text diagonally across the each page
+            const { width, height } = page.getSize()
             switch (category) {
                 case 1:
+                    let catOneXCoordinate;
+                    let catOneYCoordinate;
+                    if (width === 596 && height === 842) { // Potrait A4
+                        catOneXCoordinate = 130;
+                        catOneYCoordinate = 70;
+                    }
+                    if (width === 612 && height === 1008) { // Potrait F4
+                        catOneXCoordinate = 150;
+                        catOneYCoordinate = 150;
+                    }
                     page.drawText(text, {
-                        x: 150,
-                        y: 150,
+                        x: catOneXCoordinate,
+                        y: catOneYCoordinate,
                         size: 100,
                         font: arialRegularBoldFont,
                         color: rgb(0, 0, 0),
@@ -38,9 +49,19 @@ export const addDraftPdf = async (req, res) => {
                 break;
 
                 case 2:
+                    let catTwoXCoordinate;
+                    let catTwoYCoordinate;
+                    if (height === 596 && width === 842) { // Landscape A4
+                        catTwoXCoordinate = 70;
+                        catTwoYCoordinate = 50;
+                    }
+                    if (height === 612 && width === 1008) { // Landscape F4
+                        catTwoXCoordinate = 150;
+                        catTwoYCoordinate = 55;
+                    }
                     page.drawText(text, {
-                        x: 150,
-                        y: 60,
+                        x: catTwoXCoordinate,
+                        y: catTwoYCoordinate,
                         size: 110,
                         font: arialRegularBoldFont,
                         color: rgb(0, 0, 0),
@@ -51,9 +72,9 @@ export const addDraftPdf = async (req, res) => {
 
                 case 3:
                     page.drawText(text, {
-                        x: 100,
-                        y: 100,
-                        size: 100,
+                        x: 150,
+                        y: 45,
+                        size: 110,
                         font: arialRegularBoldFont,
                         color: rgb(0, 0, 0),
                         opacity: 0.10,
