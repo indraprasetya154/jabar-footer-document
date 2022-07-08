@@ -10,7 +10,7 @@ export function drawTemplate5(req, pages, arialRegularFont, QRCodeImagePng, QRCo
         width = Math.ceil(convert(width, 'pt', 'cm'));
         height = Math.ceil(convert(height, 'pt', 'cm'));
 
-        // Case 1 : Lanscape
+        // Case 1 : Landscape
         if (height <= width) {
             drawText5(req, page, arialRegularFont, QRCodeImagePng, QRCodeImageLogo, footerUrl)
         }

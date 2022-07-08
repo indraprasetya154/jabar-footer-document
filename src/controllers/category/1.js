@@ -11,12 +11,12 @@ export function drawTemplate1(req, pages, arialRegularFont, QRCodeImagePng, QRCo
         width = Math.ceil(convert(width, 'pt', 'cm'));
         height = Math.ceil(convert(height, 'pt', 'cm'));
 
-        // Case 1 : A4 Lanscape
+        // Case 1 : A4 Landscape
         if (width <= 31 && height <= width) {
             drawText5(req, page, arialRegularFont, QRCodeImagePng, QRCodeImageLogo, footerUrl)
         }
         
-        // Case 2 : F4 Lanscape
+        // Case 2 : F4 Landscape
         else if (width >= 32 && height <= width) {
             drawText3(req, page, arialRegularFont, QRCodeImagePng, QRCodeImageLogo, footerUrl)
         }
