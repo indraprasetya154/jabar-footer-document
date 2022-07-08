@@ -17,7 +17,7 @@ export function drawTemplate1(req, pages, arialRegularFont, QRCodeImagePng, QRCo
             font: arialRegularFont,
             color: rgb(0, 0, 0),
         })
-        page.drawText('memasukkan kode pada Aplikasi TNDE Pemerintah Daerah Provinsi Jawa Barat.', {
+        page.drawText('memasukkan kode pada Aplikasi NDE Pemerintah Daerah Provinsi Jawa Barat.', {
             x: 185,
             y: 33-10,
             size: 8,

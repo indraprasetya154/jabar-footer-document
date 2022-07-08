@@ -10,7 +10,7 @@ export function drawTemplate4(req, pages, arialRegularFont, QRCodeImagePng, QRCo
             font: arialRegularFont,
             color: rgb(0, 0, 0),
         })
-        page.drawText('Siber dan Sandi Negara. Dokumen digital yang asli dapat diperoleh dengan memindai QR Code atau memasukkan kode pada Aplikasi TNDE', {
+        page.drawText('Siber dan Sandi Negara. Dokumen digital yang asli dapat diperoleh dengan memindai QR Code atau memasukkan kode pada Aplikasi NDE', {
             x: 100,
             y: 40-10,
             size: 7,
