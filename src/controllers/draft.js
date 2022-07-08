@@ -24,16 +24,18 @@ export const addDraftPdf = async (req, res) => {
         const category = parseInt(req.body.category)
         for (const page of pages) {
             // Draw a string of text diagonally across the each page
-            const { width, height } = page.getSize()
+            let { width, height } = page.getSize()
+            width = Math.ceil(width) //round up
+            height = Math.ceil(height) // round up
+            console.log(width, height)
             switch (category) {
                 case 1:
                     let catOneXCoordinate;
                     let catOneYCoordinate;
-                    if (width === 596 && height === 842) { // Potrait A4
+                    if (width <= 597 && height <= 843) { // Potrait A4
                         catOneXCoordinate = 130;
                         catOneYCoordinate = 70;
-                    }
-                    if (width === 612 && height === 1008) { // Potrait F4
+                    } else { // Potrait F4
                         catOneXCoordinate = 150;
                         catOneYCoordinate = 150;
                     }
@@ -51,12 +53,11 @@ export const addDraftPdf = async (req, res) => {
                 case 2:
                     let catTwoXCoordinate;
                     let catTwoYCoordinate;
-                    if (height === 596 && width === 842) { // Landscape A4
+                    if (height <= 597 && width <= 843) { // Landscape A4
                         catTwoXCoordinate = 70;
                         catTwoYCoordinate = 50;
-                    }
-                    if (height === 612 && width === 1008) { // Landscape F4
-                        catTwoXCoordinate = 150;
+                    } else { // Landscape F4
+                        catTwoXCoordinate = 120;
                         catTwoYCoordinate = 55;
                     }
                     page.drawText(text, {
