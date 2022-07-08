@@ -53,7 +53,7 @@ export const addFooterPdf = async (req, res) => {
                         font: arialRegularFont,
                         color: rgb(0, 0, 0),
                     })
-                    page.drawText('memasukkan kode pada Aplikasi TNDE Pemerintah Daerah Provinsi Jawa Barat.', {
+                    page.drawText('memasukkan kode pada Aplikasi NDE Pemerintah Daerah Provinsi Jawa Barat.', {
                         x: 185,
                         y: 50,
                         size: 8,
@@ -96,7 +96,7 @@ export const addFooterPdf = async (req, res) => {
                         font: arialRegularFont,
                         color: rgb(0, 0, 0),
                     })
-                    page.drawText('Dokumen digital yang asli dapat diperoleh dengan memindai QR Code atau memasukkan kode pada Aplikasi TNDE Pemerintah Daerah Provinsi Jawa Barat.', {
+                    page.drawText('Dokumen digital yang asli dapat diperoleh dengan memindai QR Code atau memasukkan kode pada Aplikasi NDE Pemerintah Daerah Provinsi Jawa Barat.', {
                         x: 135,
                         y: 15,
                         size: 8,
@@ -139,7 +139,7 @@ export const addFooterPdf = async (req, res) => {
                         font: arialRegularFont,
                         color: rgb(0, 0, 0),
                     })
-                    page.drawText('yang asli dapat diperoleh dengan memindai QR Code atau memasukkan kode pada Aplikasi TNDE Pemerintah Daerah Provinsi Jawa Barat.', {
+                    page.drawText('yang asli dapat diperoleh dengan memindai QR Code atau memasukkan kode pada Aplikasi NDE Pemerintah Daerah Provinsi Jawa Barat.', {
                         x: 265,
                         y: 30,
                         size: 8,
@@ -182,7 +182,7 @@ export const addFooterPdf = async (req, res) => {
                         font: arialRegularFont,
                         color: rgb(0, 0, 0),
                     })
-                    page.drawText('Siber dan Sandi Negara. Dokumen digital yang asli dapat diperoleh dengan memindai QR Code atau memasukkan kode pada Aplikasi TNDE', {
+                    page.drawText('Siber dan Sandi Negara. Dokumen digital yang asli dapat diperoleh dengan memindai QR Code atau memasukkan kode pada Aplikasi NDE', {
                         x: 100,
                         y: 24,
                         size: 7,
@@ -232,7 +232,7 @@ export const addFooterPdf = async (req, res) => {
                             font: arialRegularFont,
                             color: rgb(0, 0, 0),
                         })
-                        page.drawText('Dokumen digital yang asli dapat diperoleh dengan memindai QR Code atau memasukkan kode pada Aplikasi TNDE Pemerintah Daerah Provinsi Jawa Barat.', {
+                        page.drawText('Dokumen digital yang asli dapat diperoleh dengan memindai QR Code atau memasukkan kode pada Aplikasi NDE Pemerintah Daerah Provinsi Jawa Barat.', {
                             x: 175,
                             y: 30,
                             size: 8,
