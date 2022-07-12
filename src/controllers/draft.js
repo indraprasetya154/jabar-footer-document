@@ -1,6 +1,7 @@
 import { PDFDocument, rgb, degrees } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit'
 import fs from 'fs';
+import convert from 'convert-length';
 
 export const addDraftPdf = async (req, res) => {
     try {
@@ -21,95 +22,88 @@ export const addDraftPdf = async (req, res) => {
         }
 
         const text = 'NASKAH DRAFT';
-        const category = parseInt(req.body.category)
+        
+        // Draw a string of text diagonally across the each page
         for (const page of pages) {
-            // Draw a string of text diagonally across the each page
-            let { width, height } = page.getSize()
-            width = Math.ceil(width) //round up
-            height = Math.ceil(height) // round up
-            console.log(width, height)
-            switch (category) {
-                case 1:
-                    let catOneXCoordinate;
-                    let catOneYCoordinate;
-                    if (width <= 597 && height <= 843) { // Potrait A4
-                        catOneXCoordinate = 130;
-                        catOneYCoordinate = 70;
-                    } else { // Potrait F4
-                        catOneXCoordinate = 150;
-                        catOneYCoordinate = 150;
-                    }
-                    page.drawText(text, {
-                        x: catOneXCoordinate,
-                        y: catOneYCoordinate,
-                        size: 100,
-                        font: arialRegularBoldFont,
-                        color: rgb(0, 0, 0),
-                        opacity: 0.10,
-                        rotate: degrees(60)
-                    });
-                break;
+            const { width, height } = page.getSize()
+            
+            // Convert from point (pt) to centimeter (cm)
+            const widthInCm = Math.ceil(convert(width, 'pt', 'cm'));
+            const heightInCm = Math.ceil(convert(height, 'pt', 'cm'));
+            
+            // Case 1 : A4 Landcape
+            if (widthInCm <= 31 && heightInCm <= widthInCm) {
+                const textSize = 94;
+                const degreeAngle = 30;
+                
+                const textWidth = arialRegularBoldFont.widthOfTextAtSize(text, textSize);
+                const textHeight = arialRegularBoldFont.heightAtSize(textSize);
+                
+                page.drawText(text, {
+                    x: (width / 6) - (textWidth / 24),
+                    y: (height / 4) - (textHeight / 2),
+                    size: textSize,
+                    font: arialRegularBoldFont,
+                    color: rgb(0, 0, 0),
+                    opacity: 0.10,
+                    rotate: degrees(degreeAngle)
+                });
+            } 
+            
+            // Case 2 : F4 Landcape
+            else if (widthInCm >= 32 && heightInCm <= widthInCm) {
+                const textSize = 94;
+                const degreeAngle = 30;
 
-                case 2:
-                    let catTwoXCoordinate;
-                    let catTwoYCoordinate;
-                    if (height <= 597 && width <= 843) { // Landscape A4
-                        catTwoXCoordinate = 70;
-                        catTwoYCoordinate = 50;
-                    } else { // Landscape F4
-                        catTwoXCoordinate = 120;
-                        catTwoYCoordinate = 55;
-                    }
-                    page.drawText(text, {
-                        x: catTwoXCoordinate,
-                        y: catTwoYCoordinate,
-                        size: 110,
-                        font: arialRegularBoldFont,
-                        color: rgb(0, 0, 0),
-                        opacity: 0.10,
-                        rotate: degrees(30)
-                    });
-                break;
+                const textHeight = arialRegularBoldFont.heightAtSize(textSize);
+                
+                page.drawText(text, {
+                    x: (width / 6) - (textHeight / 6),
+                    y: (height / 6) - (textHeight / 4),
+                    size: textSize,
+                    font: arialRegularBoldFont,
+                    color: rgb(0, 0, 0),
+                    opacity: 0.10,
+                    rotate: degrees(degreeAngle)
+                });
+            }
+            
+            // Case 3 : A4 Portrait
+            else if (heightInCm <= 31 && heightInCm >= widthInCm) {
+                const textSize = 96;
+                const degreeAngle = 60;
+                
+                const textWidth = arialRegularBoldFont.widthOfTextAtSize(text, textSize);
+                const textHeight = arialRegularBoldFont.heightAtSize(textSize);
+                
+                page.drawText(text, {
+                    x: (width / 4) - (textWidth / 48),
+                    y: (height / 6) - (textHeight / 2),
+                    size: textSize,
+                    font: arialRegularBoldFont,
+                    color: rgb(0, 0, 0),
+                    opacity: 0.10,
+                    rotate: degrees(degreeAngle)
+                });
+            }
+            
+            // Case 4 : F4 Portrait
+            else {
+                const textSize = 96;
+                const degreeAngle = 60;
+                
+                const textWidth = arialRegularBoldFont.widthOfTextAtSize(text, textSize);
+                const textHeight = arialRegularBoldFont.heightAtSize(textSize);
 
-                case 3:
-                    page.drawText(text, {
-                        x: 150,
-                        y: 45,
-                        size: 110,
-                        font: arialRegularBoldFont,
-                        color: rgb(0, 0, 0),
-                        opacity: 0.10,
-                        rotate: degrees(30)
-                    });
-                break;
-
-                case 4:
-                    page.drawText(text, {
-                        x: 140,
-                        y: 140,
-                        size: 100,
-                        font: arialRegularBoldFont,
-                        color: rgb(0, 0, 0),
-                        opacity: 0.10,
-                        rotate: degrees(60)
-                    });
-                break;
-
-                case 5:
-                    page.drawText(text, {
-                        x: 100,
-                        y: 80,
-                        size: 100,
-                        font: arialRegularBoldFont,
-                        color: rgb(0, 0, 0),
-                        opacity: 0.10,
-                        rotate: degrees(30)
-                    });
-                break;
-
-                default:
-                    throw new Error('Category not yet available');
-                    break;
+                page.drawText(text, {
+                    x: (width / 4) - (textWidth / 48),
+                    y: (height / 6) - (textHeight / 4),
+                    size: textSize,
+                    font: arialRegularBoldFont,
+                    color: rgb(0, 0, 0),
+                    opacity: 0.10,
+                    rotate: degrees(degreeAngle)
+                });
             }
         }
 
