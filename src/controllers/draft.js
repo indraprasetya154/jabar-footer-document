@@ -31,7 +31,7 @@ export const addDraftPdf = async (req, res) => {
             const widthInCm = Math.ceil(convert(width, 'pt', 'cm'));
             const heightInCm = Math.ceil(convert(height, 'pt', 'cm'));
             
-            // Case 1 : A4 Landcape
+            // Case 1 : A4 Landscape
             if (widthInCm <= 31 && heightInCm <= widthInCm) {
                 const textSize = 94;
                 const degreeAngle = 30;
@@ -50,7 +50,7 @@ export const addDraftPdf = async (req, res) => {
                 });
             } 
             
-            // Case 2 : F4 Landcape
+            // Case 2 : F4 Landscape
             else if (widthInCm >= 32 && heightInCm <= widthInCm) {
                 const textSize = 94;
                 const degreeAngle = 30;
