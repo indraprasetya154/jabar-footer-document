@@ -13,7 +13,6 @@ const ENV = process.env.APP_ENV
 app.use(cors());
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 app.use(routes);
 
 app.listen(PORT, console.log(`Server running in ${ENV} mode on port ${PORT}`));

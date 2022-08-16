@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 node:17-alpine
+FROM --platform=linux/amd64 registry.digitalservice.id/proxyjds/library/node:16-alpine
 WORKDIR /app
 COPY src/package*.json ./
 
